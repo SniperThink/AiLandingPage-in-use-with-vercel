@@ -1,0 +1,530 @@
+'use client';
+
+import React, { useEffect, useRef, useState, useCallback, forwardRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Text3D, Text } from '@react-three/drei';
+import * as THREE from 'three';
+import { motion, AnimatePresence } from 'framer-motion';
+import PointerLine from './PointerLine';
+
+interface ChatMessage {
+  id: string;
+  text: string;
+  sender: 'user' | 'ai';
+}
+
+interface Bubble {
+  id: string;
+  position: [number, number, number];
+  color: string;
+  title: string;
+  description: string;
+  chatMessages: ChatMessage[];
+  bubblePosition: {
+    x: number;
+    y: number;
+    side: 'left' | 'right';
+  };
+  hexagonRef: React.RefObject<THREE.Group>;
+  onPositionUpdate: (pos: { x: number; y: number }) => void;
+}
+
+interface HexagonContainerProps {
+  position: [number, number, number];
+  color: string;
+  isActive: boolean;
+  onClick: () => void;
+  title: string;
+  description: string;
+  onPositionUpdate: (pos: { x: number; y: number }) => void;
+}
+
+interface ChatBubble3DProps {
+  message: string;
+  position: [number, number, number];
+  isUser?: boolean;
+}
+
+interface ChatBubbleGroupProps {
+  messages: ChatMessage[];
+  position: [number, number, number];
+}
+
+interface GlobeProps {
+  bubbles: Bubble[];
+  activeBubble: number;
+  setActiveBubble: (index: number) => void;
+}
+
+interface ChatBubbleProps {
+  position: [number, number, number];
+  color: string;
+  text: string;
+  isVisible: boolean;
+}
+
+const ChatBubble = React.forwardRef<THREE.Group, ChatBubbleProps>(({
+  position,
+  color,
+  text,
+  isVisible
+}, ref) => {
+  const bubbleRef = useRef<THREE.Group>(null);
+  
+  // Combine forwarded ref with local ref
+  React.useEffect(() => {
+    if (!ref) return;
+    if (typeof ref === 'function') {
+      ref(bubbleRef.current);
+    } else {
+      ref.current = bubbleRef.current;
+    }
+  }, [ref]);
+  
+  useFrame(({ camera }) => {
+    if (bubbleRef.current) {
+      bubbleRef.current.quaternion.copy(camera.quaternion);
+    }
+  });
+
+  if (!isVisible) return null;
+
+  return (
+    <group position={position} ref={bubbleRef}>
+      <mesh>
+        <planeGeometry args={[Math.min(text.length * 0.1, 2), 0.3]} />
+        <meshBasicMaterial color={color} transparent opacity={0.9} side={THREE.DoubleSide} />
+      </mesh>
+      <Text
+        position={[0, 0, 0.01]}
+        fontSize={0.08}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+        maxWidth={1.8}
+      >
+        {text}
+      </Text>
+    </group>
+  );
+});
+
+// Move HexagonContainer before Globe since it's used inside Globe
+const HexagonContainer = React.forwardRef<THREE.Group, HexagonContainerProps>(({
+  position,
+  color,
+  isActive,
+  onClick,
+  title,
+  description,
+  onPositionUpdate
+}, ref) => {
+  const localRef = useRef<THREE.Group>(null);
+  const { camera } = useThree();
+
+  // Update parent with screen position
+  useFrame(() => {
+    const currentRef = localRef.current;
+    if (currentRef && onPositionUpdate) {
+      const vector = currentRef.position.clone();
+      vector.project(camera);
+      const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+      const y = (-(vector.y * 0.5) + 0.5) * window.innerHeight;
+      onPositionUpdate({ x, y });
+    }
+  });
+
+  const textColor = isActive ? '#ffffff' : '#e5e7eb';
+  const titleScale = 0.08;
+  const descScale = 0.06;
+  const yOffset = 0.06;
+
+  return (
+    <group 
+      ref={localRef}
+      position={position} 
+      onClick={onClick}
+      userData={{ isActive }}
+    >
+      <mesh>
+        <cylinderGeometry args={[0.4, 0.4, 0.1, 6]} />
+        <meshStandardMaterial 
+          color={isActive ? '#3b82f6' : color} 
+          emissive={isActive ? '#3b82f6' : color}
+          emissiveIntensity={isActive ? 0.5 : 0.1}
+          metalness={0.2}
+          roughness={0.5}
+        />
+      </mesh>
+      
+      <Text3D
+        position={[0, yOffset, 0.06]}
+        size={titleScale}
+        height={0.01}
+        curveSegments={12}
+        bevelEnabled
+        bevelThickness={0.01}
+        bevelSize={0.002}
+        bevelOffset={0}
+        bevelSegments={1}
+        font="/fonts/helvetiker_regular.typeface.json"
+      >
+        {title}
+        <meshStandardMaterial color={textColor} />
+      </Text3D>
+      
+      <Text3D
+        position={[0, -yOffset, 0.06]}
+        size={descScale}
+        height={0.005}
+        curveSegments={12}
+        font="/fonts/helvetiker_regular.typeface.json"
+      >
+        {description}
+        <meshStandardMaterial color={textColor} opacity={0.8} transparent />
+      </Text3D>
+    </group>
+  );
+});
+
+// Set display name for debugging
+HexagonContainer.displayName = 'HexagonContainer';
+
+const Globe: React.FC<GlobeProps> = ({ bubbles, activeBubble, setActiveBubble }) => {
+  const globeRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame(({ clock }) => {
+    // Rotate the globe
+    if (globeRef.current) {
+      globeRef.current.rotation.y = clock.getElapsedTime() * 0.1;
+    }
+    
+    // Add subtle floating animation to hexagons
+    if (groupRef.current) {
+      const time = clock.getElapsedTime();
+      groupRef.current.children.forEach((child, i) => {
+        if (i < bubbles.length) {
+          const yOffset = Math.sin(time * 0.5 + i) * 0.05;
+          child.position.y = bubbles[i].position[1] + yOffset;
+        }
+      });
+    }
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveBubble(prev => (prev + 1) % bubbles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [bubbles.length, setActiveBubble]);
+
+  return (
+    <>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      
+      <mesh ref={globeRef}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial color="#1e40af" />
+      </mesh>
+
+      <group ref={groupRef}>
+        {bubbles.map((bubble, index) => (
+          <HexagonContainer 
+            key={bubble.id}
+            position={bubble.position}
+            color={bubble.color}
+            isActive={activeBubble === index}
+            onClick={() => setActiveBubble(index)}
+            title={bubble.title}
+            description={bubble.description}
+            ref={bubble.hexagonRef}
+            onPositionUpdate={bubble.onPositionUpdate}
+          />
+        ))}
+      </group>
+
+      {/* Chat Bubbles */}
+      <group position={[0, 0, 1.5]}>
+        <ChatBubbleGroup 
+          messages={bubbles[activeBubble]?.chatMessages || []} 
+          position={[0, 0.5, 0]}
+        />
+      </group>
+    </>
+  );
+};
+
+// ChatBubble3D Component
+const ChatBubble3D: React.FC<ChatBubble3DProps> = ({ message, position, isUser = false }) => {
+  const textColor = isUser ? '#ffffff' : '#1f2937';
+  const bgColor = isUser ? '#3b82f6' : '#ffffff';
+  const textPosition: [number, number, number] = [-0.7, 0, 0.11];
+  
+  return (
+    <group position={position}>
+      <mesh position={[0, 0, 0.1]}>
+        <planeGeometry args={[1.5, 0.5]} />
+        <meshStandardMaterial 
+          color={bgColor}
+          transparent
+          opacity={0.9}
+        />
+      </mesh>
+      <Text
+        position={textPosition}
+        color={textColor}
+        fontSize={0.08}
+        lineHeight={1}
+        letterSpacing={0.02}
+        maxWidth={1.5}
+        anchorX="left"
+        anchorY="middle"
+        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaq5N.woff"
+      >
+        {message}
+      </Text>
+    </group>
+  );
+};
+
+// ChatBubbleGroup Component
+const ChatBubbleGroup: React.FC<ChatBubbleGroupProps> = ({ messages, position }) => {
+  return (
+    <group position={position}>
+      {messages.map((msg, i) => (
+        <ChatBubble3D
+          key={i}
+          message={msg.text}
+          position={[0, -i * 0.3, 0]}
+          isUser={msg.sender === 'user'}
+        />
+      ))}
+    </group>
+  );
+};
+
+export function SimpleGlobe() {
+  const [activeBubble, setActiveBubble] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [bubblePositions, setBubblePositions] = useState<Record<string, { x: number; y: number }>>({});
+  const [hexagonPositions, setHexagonPositions] = useState<Record<string, { x: number; y: number }>>({});
+  
+  const hexagonRefs = useRef<Record<string, React.RefObject<THREE.Group>>>({});
+  
+  // Initialize refs for hexagons
+  const getHexagonRef = useCallback((id: string) => {
+    if (!hexagonRefs.current[id]) {
+      hexagonRefs.current[id] = React.createRef<THREE.Group>();
+    }
+    return hexagonRefs.current[id];
+  }, []);
+  
+  const handleHexagonPositionUpdate = useCallback((id: string, position: { x: number; y: number }) => {
+    setHexagonPositions(prev => ({
+      ...prev,
+      [id]: position
+    }));
+  }, []);
+  
+  const bubbles: Bubble[] = [
+    {
+      id: 'step1',
+      position: [-1.5, 0, 0],
+      color: '#0ea5e9',
+      title: 'Step 1',
+      description: 'Input',
+      chatMessages: [
+        { id: 'm1', text: 'Let\'s automate this workflow!', sender: 'user' as const },
+        { id: 'm2', text: 'I\'ll help you with that. What would you like to do?', sender: 'ai' as const },
+      ],
+      bubblePosition: { x: 0, y: 0, side: 'left' as const },
+      hexagonRef: getHexagonRef('step1'),
+      onPositionUpdate: (pos: { x: number; y: number }) => handleHexagonPositionUpdate('step1', pos)
+    },
+    {
+      id: 'step2',
+      position: [1.5, 0, 0],
+      color: '#ef4444',
+      title: 'Step 2',
+      description: 'Process',
+      chatMessages: [
+        { id: 'm3', text: 'Processing your workflow...', sender: 'ai' as const },
+        { id: 'm4', text: 'Analyzing data patterns...', sender: 'ai' as const },
+      ],
+      bubblePosition: { x: 0, y: 0, side: 'right' as const },
+      hexagonRef: getHexagonRef('step2'),
+      onPositionUpdate: (pos: { x: number; y: number }) => handleHexagonPositionUpdate('step2', pos)
+    },
+  ];
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    
+    const timer = setInterval(() => {
+      setActiveBubble(prev => (prev + 1) % bubbles.length);
+    }, 5000);
+    
+    return () => clearInterval(timer);
+  }, [isPlaying, bubbles.length]);
+
+  // Calculate bubble positions based on hexagon positions
+  useEffect(() => {
+    const newBubblePositions: Record<string, { x: number; y: number }> = {};
+    
+    Object.entries(hexagonPositions).forEach(([id, hexPos]) => {
+      const bubble = bubbles.find(b => b.id === id);
+      if (bubble) {
+        const offsetX = bubble.bubblePosition.side === 'left' ? -200 : 200;
+        newBubblePositions[id] = {
+          x: hexPos.x + offsetX,
+          y: hexPos.y
+        };
+      }
+    });
+    
+    setBubblePositions(prev => ({
+      ...prev,
+      ...newBubblePositions
+    }));
+  }, [hexagonPositions, bubbles]);
+
+  return (
+    <div className="relative w-full h-full">
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} />
+        <Globe bubbles={bubbles} activeBubble={activeBubble} setActiveBubble={setActiveBubble} />
+      </Canvas>
+      
+      {/* External Chat Bubbles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {bubbles.map((bubble) => {
+          const bubblePos = bubblePositions[bubble.id];
+          if (!bubblePos) return null;
+          
+          return (
+            <div 
+              key={bubble.id}
+              className={`absolute transition-all duration-500 pointer-events-auto ${
+                bubble.bubblePosition.side === 'left' ? 'left-8' : 'right-8'
+              }`}
+              style={{
+                top: `${bubblePos.y}px`,
+                transform: `translateY(-50%) ${bubble.id === bubbles[activeBubble]?.id ? 'scale(1.05)' : 'scale(0.95)'}`,
+                opacity: bubble.id === bubbles[activeBubble]?.id ? 1 : 0.7,
+                transition: 'opacity 0.3s, transform 0.3s',
+                maxWidth: '300px',
+              }}
+            >
+              <div 
+                className={`p-4 rounded-2xl ${
+                  bubble.id === bubbles[activeBubble]?.id 
+                    ? 'bg-white/90 shadow-lg' 
+                    : 'bg-white/70 shadow-md'
+                }`}
+              >
+                <div className="text-sm text-gray-800">
+                  {bubble.chatMessages[0]?.text}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Pointer Lines */}
+      {bubbles.map((bubble) => {
+        const hexPos = hexagonPositions[bubble.id];
+        const bubblePos = bubblePositions[bubble.id];
+        
+        if (!hexPos || !bubblePos) return null;
+        
+        const isActive = bubble.id === bubbles[activeBubble]?.id;
+        const side = bubble.bubblePosition.side;
+        
+        return (
+          <PointerLine
+            key={`line-${bubble.id}`}
+            start={{
+              x: side === 'left' ? bubblePos.x + 300 : bubblePos.x - 20,
+              y: bubblePos.y
+            }}
+            end={{
+              x: side === 'left' ? hexPos.x + 40 : hexPos.x - 40,
+              y: hexPos.y
+            }}
+            color={isActive ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.2)'}
+            width={isActive ? 2 : 1}
+            dashArray={isActive ? '5,3' : '3,3'}
+          />
+        );
+      })}
+      
+      {/* 2D Overlay for Controls */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 bg-gray-900/80 backdrop-blur-sm p-2 rounded-lg">
+        <button 
+          onClick={() => setIsPlaying(!isPlaying)}
+          className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+        >
+          {isPlaying ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          )}
+        </button>
+        
+        <button 
+          onClick={() => setActiveBubble(prev => (prev - 1 + bubbles.length) % bubbles.length)}
+          className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+          aria-label="Previous"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <div className="flex space-x-1">
+          {bubbles.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveBubble(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                index === activeBubble ? 'bg-blue-500' : 'bg-gray-600'
+              }`}
+              aria-label={`Go to step ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <button 
+          onClick={() => setActiveBubble(prev => (prev + 1) % bubbles.length)}
+          className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors"
+          aria-label="Next"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+      
+      {/* Current Step Info */}
+      <div className="absolute top-4 left-4 right-4 bg-white/10 backdrop-blur-sm p-4 rounded-lg max-w-md">
+        <h3 className="text-white text-lg font-semibold mb-1">
+          {bubbles[activeBubble]?.title}
+        </h3>
+        <p className="text-gray-300 text-sm">
+          {bubbles[activeBubble]?.description}
+        </p>
+      </div>
+    </div>
+  );
+});
+

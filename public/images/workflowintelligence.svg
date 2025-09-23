@@ -1,0 +1,290 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for enhanced aesthetics -->
+    <linearGradient id="userGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(52, 152, 219, 0.3);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(52, 152, 219, 0.1);stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="systemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(231, 76, 60, 0.3);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(231, 76, 60, 0.1);stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="docGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a5568;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3a4553;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Drop shadow -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#2a3441"/>
+  
+  <!-- Animated background particles -->
+  <g opacity="0.3">
+    <circle cx="100" cy="100" r="2" fill="#3498db">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="150" r="1.5" fill="#e74c3c">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="500" r="1" fill="#3498db">
+      <animate attributeName="opacity" values="0.1;0.6;0.1" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="650" cy="450" r="2" fill="#e74c3c">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Floating documents with animation -->
+  <g class="floating-docs">
+    <g transform="translate(0,0)">
+      <animateTransform attributeName="transform" type="translate" 
+        values="0,0; 0,-10; 0,0" dur="4s" repeatCount="indefinite"/>
+      <rect x="50" y="80" width="60" height="80" rx="8" fill="url(#docGradient)" 
+        stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+      <g stroke="#718096" stroke-width="1" fill="none">
+        <line x1="60" y1="100" x2="90" y2="100"/>
+        <line x1="60" y1="110" x2="100" y2="110"/>
+        <line x1="60" y1="120" x2="85" y2="120"/>
+      </g>
+    </g>
+    
+    <g transform="translate(0,0)">
+      <animateTransform attributeName="transform" type="translate" 
+        values="0,0; 0,8; 0,0" dur="5s" repeatCount="indefinite"/>
+      <rect x="680" y="120" width="60" height="80" rx="8" fill="url(#docGradient)" 
+        stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+      <g stroke="#718096" stroke-width="1" fill="none">
+        <line x1="690" y1="140" x2="720" y2="140"/>
+        <line x1="690" y1="150" x2="730" y2="150"/>
+        <line x1="690" y1="160" x2="715" y2="160"/>
+      </g>
+    </g>
+    
+    <g transform="translate(0,0)">
+      <animateTransform attributeName="transform" type="translate" 
+        values="0,0; 0,-6; 0,0" dur="3.5s" repeatCount="indefinite"/>
+      <rect x="120" y="30" width="60" height="80" rx="8" fill="url(#docGradient)" 
+        stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+      <g stroke="#718096" stroke-width="1" fill="none">
+        <line x1="130" y1="50" x2="160" y2="50"/>
+        <line x1="130" y1="60" x2="170" y2="60"/>
+        <line x1="130" y1="70" x2="155" y2="70"/>
+      </g>
+    </g>
+  </g>
+  
+  <!-- User Section -->
+  <g class="user-section">
+    <!-- User circle with glow effect -->
+    <circle cx="200" cy="250" r="120" fill="url(#userGradient)" 
+      stroke="#3498db" stroke-width="3" filter="url(#glow)">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- User label -->
+    <rect x="150" y="100" width="60" height="25" rx="12" fill="rgba(52, 152, 219, 0.2)" 
+      stroke="#3498db" stroke-width="1"/>
+    <text x="180" y="117" font-family="Arial, sans-serif" font-size="12" fill="#3498db" 
+      font-weight="bold" text-anchor="middle">USER</text>
+    
+    <!-- User body -->
+    <ellipse cx="200" cy="320" rx="35" ry="55" fill="#fbbf24"/>
+    <!-- User head -->
+    <circle cx="200" cy="230" r="25" fill="#fde68a"/>
+    <!-- User hair -->
+    <path d="M175 215 Q200 200 225 215 Q225 205 200 200 Q175 205 175 215 Z" fill="#1e40af"/>
+    <!-- User arm (waving with animation) -->
+    <ellipse cx="170" cy="280" rx="8" ry="25" fill="#fde68a">
+      <animateTransform attributeName="transform" type="rotate" 
+        values="-30 170 280; -10 170 280; -30 170 280" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+    
+    <!-- Computer/laptop for user -->
+    <rect x="170" y="360" width="60" height="35" rx="4" fill="#475569"/>
+    <rect x="175" y="365" width="50" height="25" rx="2" fill="#0f172a"/>
+    <rect x="190" y="395" width="20" height="8" rx="4" fill="#64748b"/>
+  </g>
+  
+  <!-- System Section -->
+  <g class="system-section">
+    <!-- System hexagon with glow effect -->
+    <path d="M500 130 L620 180 L620 320 L500 370 L380 320 L380 180 Z" 
+      fill="url(#systemGradient)" stroke="#e74c3c" stroke-width="3" filter="url(#glow)">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" 
+        values="0 500 250; 5 500 250; 0 500 250" dur="6s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- System label -->
+    <rect x="460" y="100" width="80" height="25" rx="12" fill="rgba(231, 76, 60, 0.2)" 
+      stroke="#e74c3c" stroke-width="1"/>
+    <text x="500" y="117" font-family="Arial, sans-serif" font-size="12" fill="#e74c3c" 
+      font-weight="bold" text-anchor="middle">SYSTEM</text>
+    
+    <!-- System body -->
+    <ellipse cx="500" cy="290" rx="35" ry="55" fill="#ef4444"/>
+    <!-- System head -->
+    <circle cx="500" cy="210" r="25" fill="#fde68a"/>
+    <!-- System hair -->
+    <path d="M475 195 Q500 180 525 195 Q525 185 500 180 Q475 185 475 195 Z" fill="#1e40af"/>
+    <!-- System arm (holding document) -->
+    <ellipse cx="530" cy="260" rx="8" ry="25" fill="#fde68a" transform="rotate(30 530 260)"/>
+    
+    <!-- Document in system's hand with glow -->
+    <rect x="540" y="240" width="30" height="40" rx="4" fill="#3a4553" 
+      stroke="#4a5568" stroke-width="1" filter="url(#glow)"/>
+    <g stroke="#718096" stroke-width="1" fill="none">
+      <line x1="545" y1="250" x2="565" y2="250"/>
+      <line x1="545" y1="256" x2="565" y2="256"/>
+      <line x1="545" y1="262" x2="560" y2="262"/>
+    </g>
+  </g>
+  
+  <!-- Animated connection lines -->
+  <g class="connection-lines">
+    <line x1="320" y1="250" x2="380" y2="210" stroke="#3498db" stroke-width="2" 
+      stroke-dasharray="5,5" opacity="0.6">
+      <animate attributeName="stroke-dashoffset" values="0;10" dur="1s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Data flow particles -->
+    <circle r="3" fill="#3498db">
+      <animateMotion dur="3s" repeatCount="indefinite">
+        <mpath href="#dataPath"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <path id="dataPath" d="M320,250 Q350,230 380,210" fill="none" opacity="0"/>
+  </g>
+  
+  <!-- Enhanced Chat Bubbles -->
+  <!-- User Chat Bubble -->
+  <g class="user-bubble">
+    <g transform="scale(1)">
+      <animateTransform attributeName="transform" type="scale" 
+        values="1;1.02;1" dur="4s" repeatCount="indefinite"/>
+      
+      <!-- Bubble -->
+      <rect x="50" y="420" width="280" height="80" rx="20" fill="#3a4553" 
+        stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+      <!-- Bubble tail -->
+      <path d="M180 420 L200 400 L220 420 Z" fill="#3a4553" stroke="#4a5568" stroke-width="2"/>
+      
+      <!-- Emoji with animation -->
+      <text x="70" y="450" font-family="Arial, sans-serif" font-size="20">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+        💬
+      </text>
+      
+      <!-- Text -->
+      <text x="100" y="450" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0">
+        "I spend too much time on
+      </text>
+      <text x="100" y="470" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0">
+        repetitive tasks…"
+      </text>
+    </g>
+  </g>
+  
+  <!-- System Chat Bubble -->
+  <g class="system-bubble">
+    <g transform="scale(1)">
+      <animateTransform attributeName="transform" type="scale" 
+        values="1;1.02;1" dur="3.5s" repeatCount="indefinite"/>
+      
+      <!-- Bubble -->
+      <rect x="470" y="420" width="280" height="80" rx="20" fill="rgba(52, 152, 219, 0.15)" 
+        stroke="#3498db" stroke-width="2" filter="url(#shadow)"/>
+      <!-- Bubble tail -->
+      <path d="M580 420 L600 400 L620 420 Z" fill="rgba(52, 152, 219, 0.15)" 
+        stroke="#3498db" stroke-width="2"/>
+      
+      <!-- Emoji with animation -->
+      <text x="490" y="450" font-family="Arial, sans-serif" font-size="20">
+        <animateTransform attributeName="transform" type="rotate" 
+          values="0 500 440; 10 500 440; -10 500 440; 0 500 440" dur="4s" repeatCount="indefinite"/>
+        🤖
+      </text>
+      
+      <!-- Text -->
+      <text x="520" y="450" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0">
+        "Don't worry! I can automate
+      </text>
+      <text x="520" y="470" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0">
+        your workflows."
+      </text>
+    </g>
+  </g>
+  
+  <!-- Additional floating document -->
+  <g transform="translate(0,0)">
+    <animateTransform attributeName="transform" type="translate" 
+      values="0,0; 0,5; 0,0" dur="6s" repeatCount="indefinite"/>
+    <rect x="600" y="50" width="45" height="60" rx="6" fill="url(#docGradient)" 
+      stroke="#4a5568" stroke-width="2" filter="url(#shadow)"/>
+    <g stroke="#718096" stroke-width="1" fill="none">
+      <line x1="608" y1="65" x2="632" y2="65"/>
+      <line x1="608" y1="72" x2="637" y2="72"/>
+      <line x1="608" y1="79" x2="630" y2="79"/>
+    </g>
+  </g>
+  
+  <!-- Interactive hover areas (invisible) -->
+  <circle cx="200" cy="250" r="130" fill="transparent" class="hover-user">
+    <animate attributeName="r" values="130;135;130" dur="2s" repeatCount="indefinite" 
+      begin="mouseover" end="mouseout"/>
+  </circle>
+  
+  <path d="M500 120 L630 170 L630 330 L500 380 L370 330 L370 170 Z" 
+    fill="transparent" class="hover-system">
+    <animateTransform attributeName="transform" type="scale" 
+      values="1;1.05;1" dur="2s" repeatCount="indefinite" 
+      begin="mouseover" end="mouseout"/>
+  </path>
+  
+  <style>
+    .floating-docs:hover rect {
+      stroke: #3498db;
+      stroke-width: 3;
+    }
+    
+    .user-section:hover circle {
+      stroke-width: 4;
+      filter: url(#glow);
+    }
+    
+    .system-section:hover path {
+      stroke-width: 4;
+      filter: url(#glow);
+    }
+    
+    .user-bubble:hover rect,
+    .user-bubble:hover path {
+      stroke: #3498db;
+      stroke-width: 3;
+    }
+    
+    .system-bubble:hover rect,
+    .system-bubble:hover path {
+      stroke: #e74c3c;
+      stroke-width: 3;
+    }
+  </style>
+</svg>
