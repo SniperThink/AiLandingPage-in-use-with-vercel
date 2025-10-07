@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 export const FAQSection: React.FC = () => {
-    const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null)
+    const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0)
     const toggleFAQ = (index: number) => {
         setExpandedFAQ(expandedFAQ === index ? null : index)
     }
@@ -30,9 +30,14 @@ export const FAQSection: React.FC = () => {
                             </p>
 
                             {/* CTA Button */}
-                            <Button className="bg-[#1C1C1E] text-white font-medium px-4 py-2.5 rounded-lg hover:bg-gray-700 transition-colors">
+                            <a
+                                href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-[#1C1C1E] text-white font-medium px-4 py-2.5 rounded-lg hover:bg-gray-700 transition-colors inline-flex items-center justify-center transform hover:scale-105 duration-300"
+                            >
                                 Ask A Question <ArrowRight className="w-4 h-4 ml-2" />
-                            </Button>
+                            </a>
                         </div>
                     </div>
 

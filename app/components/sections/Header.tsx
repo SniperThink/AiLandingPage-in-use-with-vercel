@@ -15,6 +15,7 @@ export default function Header() {
     "Features",
     "Why Us",
     "Process",
+    "Industry",
     "FAQ",
   ];
 
@@ -30,6 +31,34 @@ export default function Header() {
 
   const closeContactForm = () => {
     setIsContactOpen(false);
+  };
+
+  const getSectionId = (item: string) => {
+    const sectionMap: { [key: string]: string } = {
+      "Home": "home",
+      "Dashboard": "analytics-demo",
+      "Features": "features",
+      "Why Us": "why-us",
+      "Process": "process",
+      "Industry": "industries",
+      "FAQ": "faq",
+    };
+    return sectionMap[item] || item.toLowerCase();
+  };
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 64; // Fixed header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -64,12 +93,16 @@ export default function Header() {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href="#"
+                  href={`#${getSectionId(item)}`}
                   className="text-gray-300 hover:text-[#91C499] transition-all duration-300 hover:scale-105 font-medium py-1 text-sm xl:text-base whitespace-nowrap"
-                  onClick={item === "Contact" ? (e) => {
-                    e.preventDefault();
-                    openContactForm();
-                  } : undefined}
+                  onClick={(e) => {
+                    if (item === "Contact") {
+                      e.preventDefault();
+                      openContactForm();
+                    } else {
+                      scrollToSection(e, getSectionId(item));
+                    }
+                  }}
                 >
                   {item}
                 </a>
@@ -79,13 +112,14 @@ export default function Header() {
 
           {/* Desktop Buttons */}
           <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 pr-4 lg:pr-6 xl:pr-8">
-            <button
-              type="button"
-              onClick={openContactForm}
-              className="bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-3 xl:px-4 py-2 rounded-[2rem] text-sm xl:text-base whitespace-nowrap"
+            <a
+              href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-3 xl:px-4 py-2 rounded-[2rem] text-sm xl:text-base whitespace-nowrap inline-flex items-center gap-1"
             >
               Contact us
-            </button>
+            </a>
           </div>
 
           {/* Hamburger Icon */}
@@ -110,13 +144,14 @@ export default function Header() {
               {navItems.map((item) => (
                 <a
                   key={item}
-                  href="#"
+                  href={`#${getSectionId(item)}`}
                   className="text-gray-300 hover:text-[#91C499] transition-all duration-300 font-medium text-base sm:text-lg touch-target w-full text-center py-2"
                   onClick={(e) => {
                     if (item === "Contact") {
                       e.preventDefault();
                       openContactForm();
                     } else {
+                      scrollToSection(e, getSectionId(item));
                       setMenuOpen(false);
                     }
                   }}
@@ -125,14 +160,15 @@ export default function Header() {
                   {item}
                 </a>
               ))}
-              <button
-                type="button"
-                onClick={openContactForm}
-                className="w-full max-w-xs bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-4 py-3 rounded text-base font-medium touch-target mt-2"
+              <a
+                href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-xs bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-4 py-3 rounded text-base font-medium touch-target mt-2 inline-flex items-center justify-center"
                 style={{ minHeight: '44px' }}
               >
                 Contact us
-              </button>
+              </a>
             </nav>
           </div>
         </div>

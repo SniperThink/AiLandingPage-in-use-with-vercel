@@ -1,4 +1,4 @@
-import { ArrowRight, FileText, Workflow, BarChart3, Settings, Brain } from "lucide-react";
+﻿import { ArrowRight, FileText, Workflow, BarChart3, Settings, Brain } from "lucide-react";
 import "./SniperThinkSection.css";
 import { Button } from "../ui/button";
 
@@ -6,7 +6,7 @@ export default function SniperThinkSection() {
     return (
         <>
             {/* Why Choose SniperThink Section - Updated with Brand Colors and Flip Cards */}
-            <section className="pt-16 pb-16">
+            <section id="why-us" className="pt-16 pb-16">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* 2x3 Grid Layout */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
@@ -16,13 +16,18 @@ export default function SniperThinkSection() {
                             <p className="text-gray-300 mb-4">
                                 {"From fast deployment to full control, here's why teams choose us over the noise."}
                             </p>
-                            <Button variant="link" className="text-[#91C499] hover:text-[#1A6262] p-0 font-medium !justify-start self-start">
+                            <a
+                                href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#91C499] hover:text-[#1A6262] p-0 font-medium inline-flex items-center transition-all duration-300 hover:translate-x-1"
+                            >
                                 Discover how SniperThink works <ArrowRight className="w-4 h-4 ml-1" />
-                            </Button>
+                            </a>
                         </div>
 
                         {/* Scale Card */}
-                        <div className="flip-card hover:scale-105 hover:shadow-2xl hover:shadow-[#1A6262]/20 transition-all duration-300 ease-in-out">
+                        <div className="flip-card transition-all duration-300 ease-in-out">
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div className="w-12 h-12 bg-gradient-to-r from-[#1A6262] to-[#91C499] rounded-lg flex items-center justify-center mb-4 shadow-sm">
@@ -42,7 +47,7 @@ export default function SniperThinkSection() {
                         </div>
 
                         {/* Tone Card */}
-                        <div className="flip-card hover:scale-105 hover:shadow-2xl hover:shadow-[#E1A940]/20 transition-all duration-300 ease-in-out">
+                        <div className="flip-card transition-all duration-300 ease-in-out">
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div className="w-12 h-12 bg-gradient-to-r from-[#E1A940] to-[#FF6700] rounded-lg flex items-center justify-center mb-4 shadow-sm">
@@ -62,7 +67,7 @@ export default function SniperThinkSection() {
                         </div>
 
                         {/* Signals Card */}
-                        <div className="flip-card hover:scale-105 hover:shadow-2xl hover:shadow-[#91C499]/20 transition-all duration-300 ease-in-out">
+                        <div className="flip-card transition-all duration-300 ease-in-out">
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div className="w-12 h-12 bg-gradient-to-r from-[#91C499] to-[#1A6262] rounded-lg flex items-center justify-center mb-4 shadow-sm">
@@ -82,7 +87,7 @@ export default function SniperThinkSection() {
                         </div>
 
                         {/* Ease Card */}
-                        <div className="flip-card hover:scale-105 hover:shadow-2xl hover:shadow-[#FF6700]/20 transition-all duration-300 ease-in-out">
+                        <div className="flip-card transition-all duration-300 ease-in-out">
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div className="w-12 h-12 bg-gradient-to-r from-[#FF6700] to-[#E1A940] rounded-lg flex items-center justify-center mb-4 shadow-sm">
@@ -101,8 +106,8 @@ export default function SniperThinkSection() {
                             </div>
                         </div>
 
-                        {/* Focus Card */}
-                        <div className="flip-card hover:scale-105 hover:shadow-2xl hover:shadow-[#1A6262]/20 transition-all duration-300 ease-in-out">
+                        {/* Focus Card - Highlighted */}
+                        <div className="flip-card highlighted transition-all duration-300 ease-in-out">
                             <div className="flip-card-inner">
                                 <div className="flip-card-front">
                                     <div className="w-12 h-12 bg-gradient-to-r from-[#1A6262] to-[#91C499] rounded-lg flex items-center justify-center mb-4 shadow-sm">

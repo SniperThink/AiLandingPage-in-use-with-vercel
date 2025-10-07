@@ -27,12 +27,17 @@ export const CTA: React.FC = () => {
                     
                     {/* Third Line - Button */}
                     <div className="flex justify-center">
-                        <button className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white font-medium text-sm sm:text-base px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer min-h-[40px] sm:min-h-[44px]">
+                        <a
+                            href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white font-medium text-sm sm:text-base px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer min-h-[40px] sm:min-h-[44px]"
+                        >
                             <span>Get a Demo</span>
                             <div className="w-7 h-7 sm:w-8 sm:h-8 bg-black text-white rounded-full flex items-center justify-center">
                                 <ArrowRight className="w-4 h-4" />
                             </div>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -183,7 +183,7 @@ export default function FeaturesCarousel() {
         </div>
 
         <div className="relative">
-          <div className="overflow-hidden h-[480px] xs:h-[520px] sm:h-[560px] md:h-[520px] lg:h-[500px] xl:h-[580px]"
+          <div className="overflow-hidden h-[380px] xs:h-[400px] sm:h-[420px] md:h-[400px] lg:h-[380px] xl:h-[420px]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -196,9 +196,9 @@ export default function FeaturesCarousel() {
                 <div key={`${index}-${feature.title}`} className="w-full flex-shrink-0 px-2 sm:px-3 lg:px-5 py-2 sm:py-3 lg:py-5 h-full rounded-2xl">
                   <div className="shadow-2xl max-w-6xl mx-auto bg-white/5 border border-white/10 backdrop-blur-sm h-full rounded-xl sm:rounded-2xl overflow-hidden">
                     <div className="p-0 h-full">
-                      <div className="grid md:grid-cols-2 grid-cols-1 h-full min-h-[440px] xs:min-h-[480px] sm:min-h-[520px] md:min-h-[480px]">
+                      <div className="grid md:grid-cols-2 grid-cols-1 h-full min-h-[340px] xs:min-h-[360px] sm:min-h-[380px] md:min-h-[360px]">
                         {/* Animation Content - Mobile First, Desktop Second */}
-                        <div className="relative flex items-center justify-center h-48 xs:h-56 sm:h-64 md:h-full bg-gradient-to-br from-gray-700 to-gray-800 overflow-visible pt-2 md:pt-3 md:order-2">
+                        <div className="relative flex items-center justify-center h-40 xs:h-44 sm:h-48 md:h-full bg-gradient-to-br from-gray-700 to-gray-800 overflow-visible pt-2 md:pt-3 md:order-2">
                           <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-3 lg:p-4">
 
                             
@@ -246,13 +246,15 @@ export default function FeaturesCarousel() {
                             {/* Workflow Automation Animation */}
                             {feature.category === "Workflow Automation" && (
                               <div className="w-full h-full flex items-center justify-center">
-                                <Image
-                                  src="/images/workflowintelligence.svg"
-                                  alt="Workflow Automation Intelligence"
-                                  width={400}
-                                  height={300}
-                                  className="rounded-xl sm:rounded-2xl object-contain w-full h-full max-w-[90%] max-h-[90%] contrast-125 brightness-110"
-                                />
+                                <div className="flex items-center justify-center w-full h-full">
+                                  <Image
+                                    src="/images/workflowintelligence.svg"
+                                    alt="Workflow Automation Intelligence"
+                                    width={400}
+                                    height={300}
+                                    className="rounded-xl sm:rounded-2xl object-contain mx-auto my-auto max-w-[90%] max-h-[90%] contrast-125 brightness-110"
+                                  />
+                                </div>
                               </div>
                             )}
 
@@ -296,7 +298,7 @@ export default function FeaturesCarousel() {
                         </div>
 
                         {/* Textual Content - Mobile Second, Desktop First */}
-                        <div className="p-3 xs:p-4 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-gray-800 to-gray-900 md:order-1 min-h-[240px] xs:min-h-[260px] sm:min-h-[280px] md:min-h-[220px] overflow-y-auto">
+                        <div className="p-3 xs:p-4 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-gray-800 to-gray-900 md:order-1 min-h-[180px] xs:min-h-[200px] sm:min-h-[220px] md:min-h-[180px] overflow-y-auto">
                           <div className="w-fit mb-2 xs:mb-2.5 md:mb-3 bg-[#1A6262]/20 text-[#91C499] px-2.5 xs:px-3 py-1 border border-[#1A6262]/30 rounded-full text-xs xs:text-sm">
                             {feature.category}
                           </div>

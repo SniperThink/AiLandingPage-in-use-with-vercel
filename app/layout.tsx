@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Created with Next.js and Tailwind CSS',
   generator: 'v0.dev',
   icons: {
-    icon: '/logo.svg',
+    icon: '/favicon.png',
   },
 }
 
