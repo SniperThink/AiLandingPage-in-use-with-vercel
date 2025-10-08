@@ -12,9 +12,9 @@ export default function Hero() {
   }, []);
   
   return (
-    <section id="home" className="relative px-4 sm:px-6 lg:px-8 min-h-screen max-h-screen overflow-hidden flex items-center py-4">
-      <div className="max-w-7xl mx-auto w-full h-full flex items-center">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-8 items-center w-full">
+    <section id="home" className="relative px-4 sm:px-6 lg:px-8 min-h-screen overflow-hidden flex items-center py-8 sm:py-12 lg:py-4">
+      <div className="max-w-7xl mx-auto w-full flex items-center">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-8 items-center w-full">
           {/* Left Content */}
           <div className="text-center lg:text-left order-1 lg:order-1">
             <motion.div
@@ -28,7 +28,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 sm:mb-5 leading-tight"
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 leading-tight"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -60,7 +60,7 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p
-              className="text-base sm:text-lg lg:text-lg text-gray-300 mb-5 sm:mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0"
+              className="text-sm xs:text-base sm:text-lg lg:text-lg text-gray-300 mb-4 sm:mb-5 md:mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -70,12 +70,12 @@ export default function Hero() {
 
             {/* Mobile Mockup - Shows on mobile between heading and buttons */}
             <motion.div
-              className="flex justify-center lg:hidden order-2 mb-5"
+              className="flex justify-center lg:hidden order-2 mb-4 sm:mb-5"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
             >
-              <div className="relative scale-[0.7] sm:scale-80">
+              <div className="relative scale-[0.65] xs:scale-[0.7] sm:scale-[0.8]">
                 {/* Phone Frame - Mobile Interface */}
                 <div className="relative w-64 xs:w-72 sm:w-80 h-[460px] xs:h-[500px] sm:h-[580px] bg-black rounded-[3rem] p-2.5 shadow-2xl transform rotate-2 xs:rotate-3 sm:rotate-6 hover:rotate-1 sm:hover:rotate-3 transition-transform duration-500">
                   <div className="w-full h-full bg-gray-900 rounded-[2.5rem] overflow-hidden relative border border-gray-700">
@@ -320,32 +320,32 @@ export default function Hero() {
 
             {/* Agent Type Toggle */}
             <motion.div
-              className="flex justify-center lg:justify-start mb-4 sm:mb-5"
+              className="flex justify-center lg:justify-start mb-3 sm:mb-4 md:mb-5"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.9 }}
             >
-              <div className="bg-white/5 rounded-2xl p-1.5 sm:p-2 shadow-2xl border border-white/10 backdrop-blur-sm">
+              <div className="bg-white/5 rounded-xl sm:rounded-2xl p-1 sm:p-1.5 md:p-2 shadow-2xl border border-white/10 backdrop-blur-sm">
                 <div className="flex space-x-1 sm:space-x-2">
                   <Button
                     onClick={() => setActiveAgent("chat")}
-                    className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl transition-all duration-300 text-sm sm:text-base ${activeAgent === "chat"
+                    className={`px-2.5 xs:px-3 sm:px-6 py-1.5 xs:py-2 sm:py-3 rounded-lg xs:rounded-xl transition-all duration-300 text-xs xs:text-sm sm:text-base ${activeAgent === "chat"
                         ? "bg-gradient-to-r from-[#1A6262] to-[#91C499] text-white shadow-lg"
                         : "bg-transparent text-gray-300 hover:bg-gray-700/50"
                       }`}
                   >
-                    <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    <MessageCircle className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 mr-1 xs:mr-1.5 sm:mr-2" />
                     <span className="hidden xs:inline">Chat Agent</span>
                     <span className="xs:hidden">Chat</span>
                   </Button>
                   <Button
                     onClick={() => setActiveAgent("call")}
-                    className={`px-3 sm:px-6 py-2 sm:py-3 rounded-xl transition-all duration-300 text-sm sm:text-base ${activeAgent === "call"
+                    className={`px-2.5 xs:px-3 sm:px-6 py-1.5 xs:py-2 sm:py-3 rounded-lg xs:rounded-xl transition-all duration-300 text-xs xs:text-sm sm:text-base ${activeAgent === "call"
                         ? "bg-gradient-to-r from-[#E1A940] to-[#FF6700] text-white shadow-lg"
                         : "bg-transparent text-gray-300 hover:bg-gray-700/50"
                       }`}
                   >
-                    <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                    <Phone className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 mr-1 xs:mr-1.5 sm:mr-2" />
                     <span className="hidden xs:inline">Voice Agent</span>
                     <span className="xs:hidden">Voice</span>
                   </Button>
@@ -354,7 +354,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 sm:gap-3 justify-center lg:justify-start px-2 sm:px-0"
+              className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center lg:justify-start px-2 sm:px-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.1 }}
@@ -363,10 +363,10 @@ export default function Hero() {
                 href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-6 sm:px-7 py-3 sm:py-3.5 text-base sm:text-base rounded-[2rem] w-full sm:w-auto touch-target inline-flex items-center justify-center gap-2 font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="bg-gradient-to-r from-[#E1A940] to-[#FF6700] hover:from-[#FF6700] hover:to-[#E1A940] text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 px-5 xs:px-6 sm:px-7 py-2.5 xs:py-3 sm:py-3.5 text-sm xs:text-base sm:text-base rounded-[2rem] w-full sm:w-auto touch-target inline-flex items-center justify-center gap-2 font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               >
                 Book an Audit Call
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 xs:w-5 xs:h-5">
                   <path d="M5 12h14"/>
                   <path d="m12 5 7 7-7 7"/>
                 </svg>
@@ -381,7 +381,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
           >
-            <div className="relative scale-[0.7] sm:scale-80 lg:scale-95">
+            <div className="relative lg:scale-90 xl:scale-95">
               {/* Phone Frame - Mobile Interface */}
               <div className="relative w-64 xs:w-72 sm:w-80 lg:w-72 xl:w-80 h-[460px] xs:h-[500px] sm:h-[580px] lg:h-[540px] xl:h-[580px] bg-black rounded-[3rem] p-2.5 shadow-2xl transform rotate-2 xs:rotate-3 sm:rotate-6 hover:rotate-1 sm:hover:rotate-3 transition-transform duration-500">
                 <div className="w-full h-full bg-gray-900 rounded-[2.5rem] overflow-hidden relative border border-gray-700">
