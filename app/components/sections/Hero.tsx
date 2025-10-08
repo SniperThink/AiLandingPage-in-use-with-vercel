@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Zap, MessageCircle, Phone, Send, Mic, VolumeX, Camera, Paperclip, Smile } from "lucide-react";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   const [activeAgent, setActiveAgent] = useState<"chat" | "call">("chat");
@@ -16,25 +17,64 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-8 items-center w-full">
           {/* Left Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-4 sm:px-5 py-1.5 mb-3 sm:mb-4 border border-[#1A6262]/30">
+            <motion.div
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-4 sm:px-5 py-1.5 mb-3 sm:mb-4 border border-[#1A6262]/30"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <Zap className="w-3 h-3 sm:w-4 sm:h-4 text-[#E1A940]" />
               <span className="text-[#91C499] font-medium text-sm sm:text-base">{"Your 24/7 AI Agent is here"}</span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 sm:mb-5 leading-tight">
-          <span className="bg-gradient-to-r from-[#1A6262] via-[#91C499] to-[#E1A940] bg-clip-text text-transparent animate-pulse drop-shadow-2xl block mb-1 py-1">
-            Say&nbsp;Hello
-          </span>
-          <span className="text-white block mb-1">To Your Smartest</span>
-          <span className="text-white block mb-1">Sales Assistant</span>
-            </h1>
+            <motion.h1
+              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold mb-4 sm:mb-5 leading-tight"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <motion.span
+                className="bg-gradient-to-r from-[#1A6262] via-[#91C499] to-[#E1A940] bg-clip-text text-transparent drop-shadow-2xl block mb-1 py-1"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                Say&nbsp;Hello
+              </motion.span>
+              <motion.span
+                className="text-white block mb-1"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                To Your Smartest
+              </motion.span>
+              <motion.span
+                className="text-white block mb-1"
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                Sales Assistant
+              </motion.span>
+            </motion.h1>
 
-            <p className="text-base sm:text-lg lg:text-lg text-gray-300 mb-5 sm:mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0">
+            <motion.p
+              className="text-base sm:text-lg lg:text-lg text-gray-300 mb-5 sm:mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
               {"Deploy voice and chat agents that understand context, qualify leads, and trigger actions — all without a human in the loop. Work smarter, close faster, and never miss a lead."}
-            </p>
+            </motion.p>
 
             {/* Agent Type Toggle */}
-            <div className="flex justify-center lg:justify-start mb-4 sm:mb-5">
+            <motion.div
+              className="flex justify-center lg:justify-start mb-4 sm:mb-5"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+            >
               <div className="bg-white/5 rounded-2xl p-1.5 sm:p-2 shadow-2xl border border-white/10 backdrop-blur-sm">
                 <div className="flex space-x-1 sm:space-x-2">
                   <Button
@@ -61,9 +101,14 @@ export default function Hero() {
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-3 justify-center lg:justify-start px-2 sm:px-0">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-3 justify-center lg:justify-start px-2 sm:px-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
+            >
               <a
                 href="https://calendly.com/admin-sniperthink/walk-through-for-demos?month=2025-09"
                 target="_blank"
@@ -76,15 +121,20 @@ export default function Hero() {
                   <path d="m12 5 7 7-7 7"/>
                 </svg>
               </a>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Mobile Mockup */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+          <motion.div
+            className="flex justify-center lg:justify-end order-1 lg:order-2"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.3, ease: "easeOut" }}
+          >
             <div className="relative scale-[0.7] sm:scale-80 lg:scale-95">
               {/* Phone Frame - Mobile Interface */}
-              <div className="relative w-64 xs:w-72 sm:w-80 lg:w-72 xl:w-80 h-[460px] xs:h-[500px] sm:h-[580px] lg:h-[540px] xl:h-[580px] bg-black rounded-[2rem] xs:rounded-[2.5rem] sm:rounded-[3rem] p-1 xs:p-1.5 sm:p-2 shadow-2xl transform rotate-2 xs:rotate-3 sm:rotate-6 hover:rotate-1 sm:hover:rotate-3 transition-transform duration-500">
-                <div className="w-full h-full bg-gray-900 rounded-[1.5rem] xs:rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative border border-gray-700">
+              <div className="relative w-64 xs:w-72 sm:w-80 lg:w-72 xl:w-80 h-[460px] xs:h-[500px] sm:h-[580px] lg:h-[540px] xl:h-[580px] bg-black rounded-[3rem] p-2.5 shadow-2xl transform rotate-2 xs:rotate-3 sm:rotate-6 hover:rotate-1 sm:hover:rotate-3 transition-transform duration-500">
+                <div className="w-full h-full bg-gray-900 rounded-[2.5rem] overflow-hidden relative border border-gray-700">
                   {/* Status Bar */}
                   <div className="flex justify-between items-center px-3 xs:px-4 sm:px-6 py-1.5 xs:py-2 sm:py-3 bg-gray-800">
                     <span className="text-[10px] xs:text-xs sm:text-sm font-medium text-white">9:41</span>
@@ -322,7 +372,7 @@ export default function Hero() {
               <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-[#E1A940]/20 rounded-full animate-bounce delay-2000"></div>
               <div className="absolute top-1/2 -left-8 w-8 h-8 bg-[#1A6262]/20 rounded-full animate-ping delay-3000"></div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

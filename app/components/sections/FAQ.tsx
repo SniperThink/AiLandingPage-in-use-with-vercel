@@ -2,6 +2,7 @@ import { ArrowRight, ChevronDown, HelpCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { faqs } from "@/data/faqs";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 
 export const FAQSection: React.FC = () => {
@@ -14,7 +15,13 @@ export const FAQSection: React.FC = () => {
             <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
                     {/* Left Column - Still Have Questions Card */}
-                    <div className="lg:col-span-1 h-full self-stretch">
+                    <motion.div
+                        className="lg:col-span-1 h-full self-stretch"
+                        initial={{ opacity: 0, x: -100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                    >
                         <div className="bg-white/2 border border-white/8 p-8 rounded-[20px] flex flex-col items-center text-center h-full">
                             {/* Icon Box */}
                             <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[#1A6262] to-[#91C499] flex items-center justify-center mb-4">
@@ -39,10 +46,16 @@ export const FAQSection: React.FC = () => {
                                 Ask A Question <ArrowRight className="w-4 h-4 ml-2" />
                             </a>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right Column - FAQ Accordion */}
-                    <div className="lg:col-span-2">
+                    <motion.div
+                        className="lg:col-span-2"
+                        initial={{ opacity: 0, x: 100 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                    >
                         <div className="flex flex-col gap-3">
                             {faqs.map((faq, index) => (
                                 <div
@@ -71,7 +84,7 @@ export const FAQSection: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
