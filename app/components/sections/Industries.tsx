@@ -83,10 +83,27 @@ const cards = [
 export default function Industries() {
   const [currentGroup, setCurrentGroup] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [cardsPerGroup, setCardsPerGroup] = useState(3);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const cardsPerGroup = 3;
   const totalGroups = Math.ceil(cards.length / cardsPerGroup);
+
+  // Handle responsive cards per group
+  useEffect(() => {
+    const updateCardsPerGroup = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerGroup(1); // Mobile: 1 card
+      } else if (window.innerWidth < 1024) {
+        setCardsPerGroup(2); // Tablet: 2 cards
+      } else {
+        setCardsPerGroup(3); // Desktop: 3 cards
+      }
+    };
+
+    updateCardsPerGroup();
+    window.addEventListener('resize', updateCardsPerGroup);
+    return () => window.removeEventListener('resize', updateCardsPerGroup);
+  }, []);
 
   const scrollToGroup = (groupIndex: number) => {
     const container = scrollContainerRef.current;
@@ -182,21 +199,21 @@ export default function Industries() {
   }, [isHovered, currentGroup, totalGroups, scrollToGroup]);
 
   return (
-    <section id="industries" className="py-12 bg-black">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="industries" className="py-8 sm:py-10 md:py-12 bg-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-4 py-1.5 mb-4 border border-[#1A6262]/30">
-            <CheckCircle className="w-4 h-4 text-[#91C499]" />
-            <span className="text-[#91C499] font-medium text-sm">Industry Solutions</span>
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-3 sm:px-4 py-1 sm:py-1.5 mb-3 sm:mb-4 border border-[#1A6262]/30">
+            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-[#91C499]" />
+            <span className="text-[#91C499] font-medium text-xs sm:text-sm">Industry Solutions</span>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-3 leading-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3 leading-tight px-2">
             Built for Industries That Need{" "}
             <span className="bg-gradient-to-r from-[#1A6262] to-[#91C499] bg-clip-text text-transparent">
               Speed, Scale & Smart Support
             </span>
           </h2>
-          <p className="text-base text-[#D1D1D1] max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-[#D1D1D1] max-w-2xl mx-auto px-4">
             Automate conversations throughout the entire customer journey.
           </p>
         </div>
@@ -209,7 +226,7 @@ export default function Industries() {
         >
           <div
             ref={scrollContainerRef}
-            className="flex overflow-x-auto overflow-y-visible pb-8 pt-2 scrollbar-hide snap-x snap-mandatory"
+            className="flex overflow-x-auto overflow-y-visible pb-6 sm:pb-8 pt-2 scrollbar-hide snap-x snap-mandatory"
             style={{
               scrollSnapType: "x mandatory"
             }}
@@ -217,26 +234,26 @@ export default function Industries() {
             {Array.from({ length: totalGroups }).map((_, groupIndex) => (
               <div
                 key={groupIndex}
-                className="flex-shrink-0 w-full flex gap-6 px-4 py-4 snap-start"
+                className="flex-shrink-0 w-full flex gap-3 sm:gap-4 md:gap-6 px-2 sm:px-4 py-3 sm:py-4 snap-start"
               >
                 {cards.slice(groupIndex * cardsPerGroup, (groupIndex + 1) * cardsPerGroup).map((card, cardIndex) => (
                   <div
                     key={`${card.title}-${groupIndex}-${cardIndex}`}
-                    className="flex-1 min-w-0 h-[400px] bg-[#111] rounded-[20px] p-8 relative overflow-hidden group hover:scale-105 transition-all duration-300"
+                    className="flex-1 min-w-0 h-[350px] sm:h-[380px] md:h-[400px] bg-[#111] rounded-[16px] sm:rounded-[20px] p-5 sm:p-6 md:p-8 relative overflow-hidden group hover:scale-105 transition-all duration-300"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} rounded-[20px]`}></div>
-                    <div className={`absolute inset-0 ${card.shadow} rounded-[20px]`}></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} rounded-[16px] sm:rounded-[20px]`}></div>
+                    <div className={`absolute inset-0 ${card.shadow} rounded-[16px] sm:rounded-[20px]`}></div>
                     <div className="relative z-10 h-full flex flex-col">
-                      <div className={`w-16 h-16 bg-gradient-to-r ${card.iconBg} rounded-full flex items-center justify-center mb-8 shadow-lg`}>
+                      <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r ${card.iconBg} rounded-full flex items-center justify-center mb-5 sm:mb-6 md:mb-8 shadow-lg`}>
                         {React.cloneElement(card.icon, {
-                          className: "w-8 h-8 text-white"
+                          className: "w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
                         })}
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-1.5 sm:mb-2">{card.title}</h3>
                       {card.subtitle && (
-                        <p className={`text-sm ${card.subtitleColor} mb-4 font-medium`}>{card.subtitle}</p>
+                        <p className={`text-xs sm:text-sm ${card.subtitleColor} mb-3 sm:mb-4 font-medium`}>{card.subtitle}</p>
                       )}
-                      <p className="text-[#D1D1D1] text-sm leading-relaxed">
+                      <p className="text-[#D1D1D1] text-xs sm:text-sm leading-relaxed">
                         {card.description}
                       </p>
                     </div>
@@ -247,25 +264,25 @@ export default function Industries() {
           </div>
 
           {/* Navigation Controls with Progress Dots */}
-          <div className="flex justify-center items-center mt-6 gap-4">
+          <div className="flex justify-center items-center mt-4 sm:mt-6 gap-3 sm:gap-4">
             {/* Left Arrow Button */}
             <button
               onClick={prevGroup}
               disabled={currentGroup === 0}
               aria-label="Previous group"
-              className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-[#91C499]/40 hover:bg-[#1A6262]/20 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-white/20 disabled:hover:bg-transparent"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-[#91C499]/40 hover:bg-[#1A6262]/20 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-white/20 disabled:hover:bg-transparent"
             >
-              <ChevronLeft className="w-5 h-5 text-white" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </button>
 
             {/* Progress Dots */}
-            <div className="flex space-x-2">
+            <div className="flex space-x-1.5 sm:space-x-2">
               {Array.from({ length: totalGroups }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => scrollToGroup(index)}
                   aria-label={`Go to group ${index + 1}`}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
+                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-200 ${
                     index === currentGroup ? "bg-[#91C499] scale-125" : "bg-[#444] hover:bg-[#666]"
                   }`}
                 />
@@ -277,9 +294,9 @@ export default function Industries() {
               onClick={nextGroup}
               disabled={currentGroup === totalGroups - 1}
               aria-label="Next group"
-              className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-[#91C499]/40 hover:bg-[#1A6262]/20 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-white/20 disabled:hover:bg-transparent"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-[#91C499]/40 hover:bg-[#1A6262]/20 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:border-white/20 disabled:hover:bg-transparent"
             >
-              <ChevronRight className="w-5 h-5 text-white" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </button>
           </div>
         </div>
