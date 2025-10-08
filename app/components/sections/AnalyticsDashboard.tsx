@@ -152,16 +152,16 @@ export default function AnalyticsDashboard() {
   };
 
   return (
-    <section id="analytics-demo" className="py-10 md:py-20 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4">
-        <div className="text-center mb-10 md:mb-16">
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-4 md:px-6 py-2 mb-4 md:mb-6 border border-[#1A6262]/30">
-            <Activity className="w-4 h-4 text-[#91C499]" />
-            <span className="text-[#91C499] font-medium text-sm md:text-base">Real-time Intelligence</span>
+    <section id="analytics-demo" className="py-8 sm:py-12 md:py-16 lg:py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1A6262]/20 to-[#91C499]/20 rounded-full px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 mb-3 sm:mb-4 md:mb-6 border border-[#1A6262]/30">
+            <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-[#91C499]" />
+            <span className="text-[#91C499] font-medium text-xs sm:text-sm md:text-base">Real-time Intelligence</span>
           </div>
-          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">Track Every Chat. Score Every Lead</h2>
-          <p className="text-base md:text-xl text-gray-300 max-w-3xl mx-auto">
-            SniperThink’s live analytics dashboard shows performance metrics, conversion trends, and lead scoring — all in one place.
+          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 md:mb-6 px-2">Track Every Chat. Score Every Lead</h2>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto px-4">
+            SniperThink's live analytics dashboard shows performance metrics, conversion trends, and lead scoring — all in one place.
           </p>
         </div>
 
@@ -198,38 +198,38 @@ export default function AnalyticsDashboard() {
             </div>
           </div>
 
-          <div className="relative bg-black/40 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-8 border border-white/10">
+          <div className="relative bg-black/40 backdrop-blur-xl rounded-xl sm:rounded-2xl md:rounded-3xl shadow-2xl p-3 xs:p-4 sm:p-6 md:p-8 border border-white/10">
             {/* Dashboard Header */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#1A6262] to-[#91C499] rounded-xl flex items-center justify-center">
-                  <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 md:mb-8 gap-3 sm:gap-4">
+              <div className="flex items-center space-x-2 xs:space-x-3 sm:space-x-4">
+                <div className="w-9 h-9 xs:w-10 xs:h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-gradient-to-r from-[#1A6262] to-[#91C499] rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <BarChart3 className="w-4 h-4 xs:w-5 xs:h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-2xl font-bold text-white">SniperThink Analytics</h3>
-                  <p className="text-xs md:text-sm text-gray-400">Welcome Pravalika!</p>
+                  <h3 className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold text-white">SniperThink Analytics</h3>
+                  <p className="text-[10px] xs:text-xs sm:text-xs md:text-sm text-gray-400">Welcome Pravalika!</p>
                 </div>
               </div>
-              <div className="flex flex-wrap items-center space-x-2 md:space-x-4 gap-y-2">
-                <Badge className="bg-green-900/50 text-green-300 px-2 md:px-3 py-1 border border-green-700 text-xs md:text-sm">Live</Badge>
-                <Badge className="bg-blue-900/50 text-blue-300 px-2 md:px-3 py-1 border border-blue-700 text-xs md:text-sm">Real-time</Badge>
-                <Button className="bg-[#1A6262] hover:bg-[#1A6262]/80 text-white px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm">
+              <div className="flex flex-wrap items-center gap-1.5 xs:gap-2 sm:gap-2 md:gap-3 w-full sm:w-auto">
+                <Badge className="bg-green-900/50 text-green-300 px-1.5 xs:px-2 sm:px-2 md:px-3 py-0.5 xs:py-1 border border-green-700 text-[10px] xs:text-xs sm:text-xs md:text-sm">Live</Badge>
+                <Badge className="bg-blue-900/50 text-blue-300 px-1.5 xs:px-2 sm:px-2 md:px-3 py-0.5 xs:py-1 border border-blue-700 text-[10px] xs:text-xs sm:text-xs md:text-sm">Real-time</Badge>
+                <Button className="bg-[#1A6262] hover:bg-[#1A6262]/80 text-white px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 rounded-lg text-[10px] xs:text-xs sm:text-xs md:text-sm">
                   Export Summary
                 </Button>
               </div>
             </div>
 
             {/* Filter Controls */}
-            <div className="sm:flex sm:items-center sm:space-x-4 sm:space-y-0 grid grid-cols-1 gap-4 mb-6 md:mb-8">
+            <div className="sm:flex sm:items-center sm:space-x-3 sm:space-y-0 grid grid-cols-1 gap-3 sm:gap-4 mb-4 sm:mb-6 md:mb-8">
               {/* Date Picker - Full width on mobile, inline on desktop */}
               <div className="w-full">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-[#91C499]/50 hover:text-[#91C499] transition-all duration-200 text-xs md:text-sm focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] flex items-center w-full"
+                      className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:border-[#91C499]/50 hover:text-[#91C499] transition-all duration-200 text-[10px] xs:text-xs sm:text-xs md:text-sm focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] flex items-center w-full py-2 xs:py-2.5 sm:py-2.5"
                     >
-                      <Calendar className="w-4 h-4 mr-2 shrink-0" />
+                      <Calendar className="w-3 h-3 xs:w-4 xs:h-4 mr-1.5 xs:mr-2 shrink-0" />
                       <span className="truncate max-w-[180px] text-left">
                         {dateRange?.from ? (
                           dateRange.to ? (
@@ -278,10 +278,10 @@ export default function AnalyticsDashboard() {
               </div>
 
               {/* Grouped selects: grid on mobile, flex row on desktop */}
-              <div className="grid grid-cols-3 gap-4 sm:flex sm:space-x-4 sm:w-full">
+              <div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 sm:flex sm:space-x-3 sm:w-full">
                 {/** Type Select */}
                 <select
-                  className="bg-white/5 border border-white/20 rounded-lg px-3 md:px-4 py-2 text-white text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
+                  className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0.5rem center',
@@ -297,7 +297,7 @@ export default function AnalyticsDashboard() {
 
                 {/** Agent Select */}
                 <select
-                  className="bg-white/5 border border-white/20 rounded-lg px-3 md:px-4 py-2 text-white text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
+                  className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0.5rem center',
@@ -313,7 +313,7 @@ export default function AnalyticsDashboard() {
 
                 {/** Quality Select */}
                 <select
-                  className="bg-white/5 border border-white/20 rounded-lg px-3 md:px-4 py-2 text-white text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
+                  className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0.5rem center',
