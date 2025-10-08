@@ -1,31 +1,13 @@
+"use client";
+
 import useCountUp from "../../../hooks/useCountUp";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export const AnimatedMetrics: React.FC = () => {
-  const [isClient, setIsClient] = useState(false);
-  
-  // Ensure client-side rendering consistency
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const revenueCount = useCountUp(200, 2500, "%");
-  const speedCount = useCountUp(4, 2000, "X");
-  const leadsCount = useCountUp(73, 2200, "%");
-  const usersCount = useCountUp(10, 1800, "K+");
-
-  // Show final values during SSR to prevent 0 flash
-  const displayValues = isClient ? {
-    revenue: revenueCount.count || 200,
-    speed: speedCount.count || 4,
-    leads: leadsCount.count || 73,
-    users: usersCount.count || 10
-  } : {
-    revenue: 200,
-    speed: 4,
-    leads: 73,
-    users: 10
-  };
+  const revenueCount = useCountUp(200, 2500);
+  const speedCount = useCountUp(4, 2000);
+  const leadsCount = useCountUp(73, 2200);
+  const usersCount = useCountUp(10, 1800);
 
   return (
     <section id="animated-metrics" className="py-16 relative overflow-hidden">
@@ -33,11 +15,11 @@ export const AnimatedMetrics: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Revenue Growth */}
           <div
-            ref={isClient ? revenueCount.ref : undefined}
+            ref={revenueCount.ref}
             className="text-center transform hover:scale-110 transition-all duration-300"
           >
             <div className="text-3xl md:text-6xl font-bold mb-2 text-[#E1A940]">
-              {displayValues.revenue}%
+              {revenueCount.count}%
             </div>
             <div className="text-sm md:text-lg text-gray-300">
               Lead Qualification Boost
@@ -46,11 +28,11 @@ export const AnimatedMetrics: React.FC = () => {
 
           {/* Speed to Market */}
           <div
-            ref={isClient ? speedCount.ref : undefined}
+            ref={speedCount.ref}
             className="text-center transform hover:scale-110 transition-all duration-300"
           >
             <div className="text-3xl md:text-6xl font-bold mb-2 text-[#E1A940]">
-              {displayValues.speed}X
+              {speedCount.count}X
             </div>
             <div className="text-sm md:text-lg text-gray-300">
               Higher Sales Conversions
@@ -59,11 +41,11 @@ export const AnimatedMetrics: React.FC = () => {
 
           {/* New Leads */}
           <div
-            ref={isClient ? leadsCount.ref : undefined}
+            ref={leadsCount.ref}
             className="text-center transform hover:scale-110 transition-all duration-300"
           >
             <div className="text-3xl md:text-6xl font-bold mb-2 text-[#E1A940]">
-              {displayValues.leads}%
+              {leadsCount.count}%
             </div>
             <div className="text-sm md:text-lg text-gray-300">
               Less Manual Work
@@ -72,11 +54,11 @@ export const AnimatedMetrics: React.FC = () => {
 
           {/* Active Users */}
           <div
-            ref={isClient ? usersCount.ref : undefined}
+            ref={usersCount.ref}
             className="text-center transform hover:scale-110 transition-all duration-300"
           >
             <div className="text-3xl md:text-6xl font-bold mb-2 text-[#E1A940]">
-              {displayValues.users}K+
+              {usersCount.count}K+
             </div>
             <div className="text-sm md:text-lg text-gray-300">
               Conversations Handled

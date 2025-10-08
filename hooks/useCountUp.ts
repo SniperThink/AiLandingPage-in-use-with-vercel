@@ -2,52 +2,62 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const useCountUp = (end: number, duration = 2000, suffix = "") => {
-  const [count, setCount] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+const useCountUp = (end: number, duration = 2000) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true)
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
         }
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.3 }
+    );
 
-    if (ref.current) {
-      observer.observe(ref.current)
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
-    return () => observer.disconnect()
-  }, [isVisible])
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [hasAnimated]);
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!hasAnimated) return;
 
-    let startTime: number
-    let animationFrame: number
+    let startTime: number | null = null;
+    let animationFrame: number;
 
     const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
 
       // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
-      setCount(Math.floor(easeOutQuart * end))
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * end);
+
+      setCount(currentCount);
 
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setCount(end); // Ensure we end at exact value
       }
-    }
+    };
 
-    animationFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [isVisible, end, duration])
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [hasAnimated, end, duration]);
 
-  return { count, ref }
+  return { count, ref };
 };
 
 export default useCountUp;
