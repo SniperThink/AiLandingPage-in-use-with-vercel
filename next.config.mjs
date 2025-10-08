@@ -10,8 +10,10 @@ const nextConfig = {
     unoptimized: true,
   },
   outputFileTracingRoot: process.cwd(),
-  outputFileTracingIncludes: {
-    '/': ['./app/**/*'],
+  experimental: {
+    outputFileTracingIncludes: {
+      '/': ['./app/**/*'],
+    },
   },
   // Add webpack config to ignore certain files
   webpack: (config, { isServer }) => {

@@ -17,10 +17,10 @@ export const FAQSection: React.FC = () => {
                     {/* Left Column - Still Have Questions Card */}
                     <motion.div
                         className="lg:col-span-1 h-full self-stretch"
-                        initial={{ opacity: 0, x: -100 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        initial={{ opacity: 0, x: -50, scale: 0.98 }}
+                        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                        viewport={{ once: false, amount: 0.3, margin: "-50px" }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
                     >
                         <div className="bg-white/2 border border-white/8 p-8 rounded-[20px] flex flex-col items-center text-center h-full">
                             {/* Icon Box */}
@@ -51,10 +51,10 @@ export const FAQSection: React.FC = () => {
                     {/* Right Column - FAQ Accordion */}
                     <motion.div
                         className="lg:col-span-2"
-                        initial={{ opacity: 0, x: 100 }}
+                        initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        viewport={{ once: false, amount: 0.2, margin: "-30px" }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
                     >
                         <div className="flex flex-col gap-3">
                             {faqs.map((faq, index) => (

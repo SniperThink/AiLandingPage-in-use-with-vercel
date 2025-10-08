@@ -173,17 +173,17 @@ export default function FeaturesCarousel() {
   };
 
   return (
-  <div id="features" className="py-8 sm:py-12 lg:py-14 xl:py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3">Built to Think, Built to Scale</h2>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-300 px-2 sm:px-0">
+  <div id="features" className="py-6 xs:py-8 sm:py-12 lg:py-14 xl:py-20 relative">
+      <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-4 xs:mb-6 sm:mb-8">
+          <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 xs:mb-2 sm:mb-3 px-2">Built to Think, Built to Scale</h2>
+          <p className="text-sm xs:text-sm sm:text-base lg:text-lg text-gray-300 px-4 xs:px-2 sm:px-0 leading-relaxed">
             Discover how our AI agents handle the heavy lifting for your business
           </p>
         </div>
 
         <div className="relative">
-          <div className="overflow-hidden h-[380px] xs:h-[400px] sm:h-[420px] md:h-[400px] lg:h-[380px] xl:h-[420px]"
+          <div className="overflow-hidden h-[400px] xs:h-[420px] sm:h-[460px] md:h-[440px] lg:h-[420px] xl:h-[460px]"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
@@ -193,13 +193,13 @@ export default function FeaturesCarousel() {
               style={{ transform: `translateX(-${actualIndex * 100}%)` }}
             >
               {extendedFeatures.map((feature, index) => (
-                <div key={`${index}-${feature.title}`} className="w-full flex-shrink-0 px-2 sm:px-3 lg:px-5 py-2 sm:py-3 lg:py-5 h-full rounded-2xl">
-                  <div className="shadow-2xl max-w-6xl mx-auto bg-white/5 border border-white/10 backdrop-blur-sm h-full rounded-xl sm:rounded-2xl overflow-hidden">
+                <div key={`${index}-${feature.title}`} className="w-full flex-shrink-0 px-1 xs:px-2 sm:px-3 lg:px-5 py-1 xs:py-2 sm:py-3 lg:py-5 h-full rounded-2xl">
+                  <div className="shadow-2xl max-w-6xl mx-auto bg-white/5 border border-white/10 backdrop-blur-sm h-full rounded-lg xs:rounded-xl sm:rounded-2xl overflow-hidden">
                     <div className="p-0 h-full">
-                      <div className="grid md:grid-cols-2 grid-cols-1 h-full min-h-[340px] xs:min-h-[360px] sm:min-h-[380px] md:min-h-[360px]">
+                      <div className="grid md:grid-cols-2 grid-cols-1 h-full min-h-[360px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[400px]">
                         {/* Animation Content - Mobile First, Desktop Second */}
-                        <div className="relative flex items-center justify-center h-40 xs:h-44 sm:h-48 md:h-full bg-gradient-to-br from-gray-700 to-gray-800 overflow-visible pt-2 md:pt-3 md:order-2">
-                          <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-3 lg:p-4">
+                        <div className="relative flex items-center justify-center h-44 xs:h-48 sm:h-56 md:h-full bg-gradient-to-br from-gray-700 to-gray-800 overflow-visible pt-1 xs:pt-2 md:pt-3 md:order-2">
+                          <div className="relative w-full h-full flex items-center justify-center p-1 xs:p-2 sm:p-3 lg:p-4">
 
                             
                             {/* Lead Qualification Animation */}
@@ -298,24 +298,24 @@ export default function FeaturesCarousel() {
                         </div>
 
                         {/* Textual Content - Mobile Second, Desktop First */}
-                        <div className="p-3 xs:p-4 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-gray-800 to-gray-900 md:order-1 min-h-[180px] xs:min-h-[200px] sm:min-h-[220px] md:min-h-[180px] overflow-y-auto">
-                          <div className="w-fit mb-2 xs:mb-2.5 md:mb-3 bg-[#1A6262]/20 text-[#91C499] px-2.5 xs:px-3 py-1 border border-[#1A6262]/30 rounded-full text-xs xs:text-sm">
+                        <div className="p-2 xs:p-3 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-gray-800 to-gray-900 md:order-1 min-h-[200px] xs:min-h-[220px] sm:min-h-[260px] md:min-h-[200px] overflow-y-auto">
+                          <div className="w-fit mb-1 xs:mb-2 md:mb-3 bg-[#1A6262]/20 text-[#91C499] px-2 xs:px-2.5 py-0.5 xs:py-1 border border-[#1A6262]/30 rounded-full text-xs">
                             {feature.category}
                           </div>
-                          <h3 className="text-base xs:text-lg sm:text-xl md:text-xl lg:text-2xl font-bold mb-2 xs:mb-2.5 md:mb-3 lg:mb-4 text-white leading-tight">{feature.title}</h3>
-                          <p className="text-gray-300 mb-3 xs:mb-3.5 md:mb-4 lg:mb-5 text-xs xs:text-sm md:text-base leading-relaxed">{feature.description}</p>
-                          <div className="space-y-1 xs:space-y-1.5 md:space-y-2 mb-3 xs:mb-3.5 md:mb-4 lg:mb-5">
+                          <h3 className="text-sm xs:text-base sm:text-xl md:text-xl lg:text-2xl font-bold mb-1 xs:mb-2 md:mb-3 lg:mb-4 text-white leading-tight">{feature.title}</h3>
+                          <p className="text-gray-300 mb-2 xs:mb-3 md:mb-4 lg:mb-5 text-xs sm:text-sm md:text-base leading-relaxed">{feature.description}</p>
+                          <div className="space-y-0.5 xs:space-y-1 md:space-y-2 mb-2 xs:mb-3 md:mb-4 lg:mb-5">
                             {feature.metrics.map((metric, metricIndex) => (
-                              <div key={metricIndex} className="flex items-start space-x-2">
-                                <CheckCircle className="w-3.5 h-3.5 xs:w-4 xs:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5 text-[#91C499] flex-shrink-0 mt-0.5" />
-                                <span className="text-xs xs:text-xs md:text-sm text-gray-200 leading-relaxed">{metric}</span>
+                              <div key={metricIndex} className="flex items-start space-x-1.5 xs:space-x-2">
+                                <CheckCircle className="w-3 h-3 xs:w-3.5 xs:h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5 text-[#91C499] flex-shrink-0 mt-0.5" />
+                                <span className="text-xs md:text-sm text-gray-200 leading-relaxed">{metric}</span>
                               </div>
                             ))}
                           </div>
                           <button
-                            className={`bg-gradient-to-r ${feature.gradient} text-white w-fit px-3 xs:px-3.5 md:px-4 lg:px-5 py-1.5 xs:py-2 md:py-2.5 text-xs xs:text-xs md:text-sm lg:text-base rounded-lg hover:opacity-90 hover:scale-105 transition-all duration-200 flex items-center shadow-lg`}
+                            className={`bg-gradient-to-r ${feature.gradient} text-white w-fit px-2.5 xs:px-3 md:px-4 lg:px-5 py-1 xs:py-1.5 md:py-2.5 text-xs md:text-sm lg:text-base rounded-md xs:rounded-lg hover:opacity-90 hover:scale-105 transition-all duration-200 flex items-center shadow-lg`}
                           >
-                            {feature.button} <ArrowRight className="w-3 h-3 xs:w-3.5 xs:h-3.5 md:w-4 md:h-4 ml-1.5 xs:ml-2" />
+                            {feature.button} <ArrowRight className="w-3 h-3 xs:w-3.5 xs:h-3.5 md:w-4 md:h-4 ml-1 xs:ml-1.5" />
                           </button>
                         </div>
                       </div>
@@ -327,7 +327,7 @@ export default function FeaturesCarousel() {
           </div>
 
           {/* Controls - Mobile Optimized */}
-          <div className="flex justify-center items-center mt-6 sm:mt-8 gap-4">
+          <div className="flex justify-center items-center mt-4 xs:mt-6 sm:mt-8 gap-3 xs:gap-4 px-4">
             <button
               onClick={() => {
                 pauseAutoScroll();
@@ -335,19 +335,19 @@ export default function FeaturesCarousel() {
               }}
               disabled={isTransitioning}
               aria-label="Previous"
-              className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-8 h-8 xs:w-10 xs:h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             >
-              <ChevronLeft className="w-5 h-5 text-white" />
+              <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </button>
             
-            <div className="flex space-x-2">
+            <div className="flex space-x-1.5 xs:space-x-2">
               {features.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToFeature(index)}
                   disabled={isTransitioning}
                   aria-label={`Go to slide ${index + 1}`}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
+                  className={`w-2 h-2 xs:w-2.5 xs:h-2.5 rounded-full transition-all duration-200 touch-manipulation ${
                     index === currentFeature
                       ? "bg-[#91C499] scale-125"
                       : "bg-[#444] hover:bg-[#666]"
@@ -363,9 +363,9 @@ export default function FeaturesCarousel() {
               }}
               disabled={isTransitioning}
               aria-label="Next"
-              className="w-10 h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-8 h-8 xs:w-10 xs:h-10 rounded-full border border-white/20 bg-transparent flex items-center justify-center transition-all hover:scale-110 hover:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             >
-              <ChevronRight className="w-5 h-5 text-white" />
+              <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 text-white" />
             </button>
           </div>
         </div>

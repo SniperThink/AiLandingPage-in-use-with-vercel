@@ -5,7 +5,7 @@ import PrivacyPolicy from "../ui/PrivacyPolicy";
 
 export const Footer: React.FC = () => {
   return (
-    <footer id="footer" className="bg-[#080C0D] text-white">
+    <footer id="footer" className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-20 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
