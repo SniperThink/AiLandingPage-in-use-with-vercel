@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
                 <img
                   src="/images/logo.svg"
                   alt="SniperThink Logo"
-                  className="h-auto w-[180px] xs:w-[200px] sm:w-[220px] md:w-[240px] lg:w-[260px] xl:w-[280px]"
+                  className="h-auto w-[220px] xs:w-[240px] sm:w-[260px] md:w-[280px] lg:w-[300px] xl:w-[320px] 2xl:w-[340px]"
                 />
               </a>
               <p className="text-gray-300 text-base leading-relaxed max-w-md font-light">

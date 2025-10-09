@@ -277,41 +277,44 @@ export default function AnalyticsDashboard() {
                 </Popover>
               </div>
 
-              {/* Grouped selects: grid on mobile, flex row on desktop */}
-              <div className="grid grid-cols-3 gap-2 xs:gap-3 sm:gap-4 sm:flex sm:space-x-3 sm:w-full">
-                {/** Type Select */}
-                <select
-                  className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: 'right 0.5rem center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '1.5em 1.5em',
-                    paddingRight: '2.5rem'
-                  }}
-                >
-                  <option className="bg-[#0F0F11] text-white">All Types</option>
-                  <option className="bg-[#0F0F11] text-white">Chat</option>
-                  <option className="bg-[#0F0F11] text-white">Call</option>
-                </select>
+              {/* Grouped selects: 2 columns on mobile for Type & Agent, full width for Lead Quality, flex row on desktop */}
+              <div className="flex flex-col gap-2 xs:gap-3 sm:gap-0 sm:flex-row sm:space-x-3 sm:w-full">
+                {/* Type and Agent in a row on mobile */}
+                <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:contents">
+                  {/** Type Select */}
+                  <select
+                    className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.5em 1.5em',
+                      paddingRight: '2.5rem'
+                    }}
+                  >
+                    <option className="bg-[#0F0F11] text-white">All Types</option>
+                    <option className="bg-[#0F0F11] text-white">Chat</option>
+                    <option className="bg-[#0F0F11] text-white">Call</option>
+                  </select>
 
-                {/** Agent Select */}
-                <select
-                  className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: 'right 0.5rem center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: '1.5em 1.5em',
-                    paddingRight: '2.5rem'
-                  }}
-                >
-                  <option className="bg-[#0F0F11] text-white">All Agents</option>
-                  <option className="bg-[#0F0F11] text-white">Chatter box 3000</option>
-                  <option className="bg-[#0F0F11] text-white">Voice Master Pro</option>
-                </select>
+                  {/** Agent Select */}
+                  <select
+                    className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.5em 1.5em',
+                      paddingRight: '2.5rem'
+                    }}
+                  >
+                    <option className="bg-[#0F0F11] text-white">All Agents</option>
+                    <option className="bg-[#0F0F11] text-white">Chatter box 3000</option>
+                    <option className="bg-[#0F0F11] text-white">Voice Master Pro</option>
+                  </select>
+                </div>
 
-                {/** Quality Select */}
+                {/** Lead Quality Select - Full width on mobile */}
                 <select
                   className="bg-white/5 border border-white/20 rounded-md sm:rounded-lg px-2 xs:px-3 sm:px-3 md:px-4 py-1.5 xs:py-2 text-white text-[10px] xs:text-xs sm:text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[#91C499] focus:border-[#91C499] appearance-none hover:bg-white/10 transition-all duration-200 w-full"
                   style={{
