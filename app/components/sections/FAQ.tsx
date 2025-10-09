@@ -11,7 +11,7 @@ export const FAQSection: React.FC = () => {
         setExpandedFAQ(expandedFAQ === index ? null : index)
     }
     return (
-        <section id="faq" className="pt-20 mt-16">
+        <section id="faq" className="pt-20 pb-6 mt-16">
             <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-stretch">
                     {/* Left Column - Still Have Questions Card */}
