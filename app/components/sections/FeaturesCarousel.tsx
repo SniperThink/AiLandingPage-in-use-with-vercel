@@ -198,7 +198,7 @@ export default function FeaturesCarousel() {
                     <div className="p-0 h-full">
                       <div className="grid md:grid-cols-2 grid-cols-1 h-full min-h-[360px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[400px]">
                         {/* Animation Content - Mobile First, Desktop Second */}
-                        <div className="relative flex items-center justify-center h-44 xs:h-48 sm:h-56 md:h-full bg-gradient-to-br from-gray-700 to-gray-800 overflow-visible pt-1 xs:pt-2 md:pt-3 md:order-2">
+                        <div className="relative flex items-center justify-center h-44 xs:h-48 sm:h-56 md:h-full bg-gradient-to-br from-[#1C1C1E] to-[#0F0F11] overflow-visible pt-1 xs:pt-2 md:pt-3 md:order-2">
                           <div className="relative w-full h-full flex items-center justify-center p-1 xs:p-2 sm:p-3 lg:p-4">
 
                             
@@ -298,7 +298,7 @@ export default function FeaturesCarousel() {
                         </div>
 
                         {/* Textual Content - Mobile Second, Desktop First */}
-                        <div className="p-2 xs:p-3 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-gray-800 to-gray-900 md:order-1 min-h-[200px] xs:min-h-[220px] sm:min-h-[260px] md:min-h-[200px] overflow-y-auto">
+                        <div className="p-2 xs:p-3 sm:p-5 md:p-4 lg:p-5 xl:p-6 flex flex-col justify-center h-full bg-gradient-to-br from-[#1A1A1D] to-[#0F0F11] md:order-1 min-h-[200px] xs:min-h-[220px] sm:min-h-[260px] md:min-h-[200px] overflow-y-auto">
                           <div className="w-fit mb-1 xs:mb-2 md:mb-3 bg-[#1A6262]/20 text-[#91C499] px-2 xs:px-2.5 py-0.5 xs:py-1 border border-[#1A6262]/30 rounded-full text-xs">
                             {feature.category}
                           </div>
