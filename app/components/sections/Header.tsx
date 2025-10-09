@@ -83,7 +83,7 @@ export default function Header() {
               alt="SniperThink Logo"
               width={371}
               height={44}
-              className="h-auto w-[200px] xs:w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] xl:w-[380px] 2xl:w-[420px] max-w-none"
+              className="h-auto w-[240px] xs:w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] xl:w-[420px] 2xl:w-[460px] max-w-none"
             />
           </div>
 
